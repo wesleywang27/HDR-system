@@ -1,0 +1,54 @@
+﻿<Window x:Class="Digit_Recognizer.LoginWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Digit_Recognizer"
+        mc:Ignorable="d"
+        Title="登录" Height="300" Width="400" 
+        WindowStartupLocation="CenterScreen"
+        FocusManager.FocusedElement="{Binding ElementName=txt_userName}">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="80"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="40"/>
+        </Grid.ColumnDefinitions>
+        <Grid.Background>
+            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                <GradientStop Color="#5aacf6" Offset="0.0"/>
+                <GradientStop Color="#0056f1" Offset="0.2"/>
+                <GradientStop Color="#13ceff" Offset="0.4"/>
+                <GradientStop Color="#006bff" Offset="0.6"/>
+                <GradientStop Color="#19d5ff" Offset="0.8"/>
+                <GradientStop Color="#5aacf6" Offset="1.0"/>
+            </LinearGradientBrush>
+        </Grid.Background>
+        <TextBlock Grid.Row="2" Grid.ColumnSpan="3" 
+                   Text="XXX管理系统V1.1.001版" TextAlignment="Center" 
+                   VerticalAlignment="Center" FontSize="22"></TextBlock>
+        <TextBlock Grid.Row="3" TextAlignment="Right"  VerticalAlignment="Center"
+                   Text="用户名:"/>
+        <TextBox Grid.Row="3" Grid.Column="1" Height="27" Margin="5 0 5 0" 
+                 Name="txt_userName"/>
+        <TextBlock Grid.Row="4" TextAlignment="Right" VerticalAlignment="Center"
+                   Text="密  码:"/>
+        <PasswordBox Grid.Row="4" Grid.Column="1" Height="27" Margin="5 0 5 0"
+                     Name="txt_Pwd"/>
+        <StackPanel Grid.Row="5" Grid.Column="1" Orientation="Horizontal">
+            <Button Content="登录" Width="70" Margin="30 0 0 0" Height="35"
+                    Name="btn_login" Click="btn_login_Click" Foreground="White" FontSize="18" Background="Transparent"/>
+            <Button Content="退出" Width="70" Margin="40 0 0 0" Height="35"
+                    Name="btn_exit" Click="btn_exit_Click" Background="Transparent" Foreground="White" FontSize="18"/>
+        </StackPanel>
+    </Grid>
+</Window>

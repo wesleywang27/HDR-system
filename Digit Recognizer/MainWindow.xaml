@@ -1,0 +1,48 @@
+﻿<Window x:Class="Digit_Recognizer.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Digit_Recognizer"
+        mc:Ignorable="d"
+        Title="成绩识别系统" Height="450" Width="600" WindowStartupLocation="CenterScreen" Icon="image/icon.png">
+    <DockPanel Width="Auto" Height="Auto" LastChildFill="True">
+        <!--顶部菜单区域-->
+        <Menu Width="Auto" Height="30" Background="LightGray" DockPanel.Dock="Top">
+            <!--Project 菜单项-->
+            <MenuItem Header="项目" Height="30" Width="40">
+                <MenuItem Header="新建"/>
+                <Separator/>
+                <MenuItem Header="打开"/>
+            </MenuItem>
+            <!--View 菜单项-->
+            <MenuItem Header="查看" Height="30" Width="40">
+                <MenuItem Header="查看"/>
+            </MenuItem>
+            <!--Help 菜单项-->
+            <MenuItem Header="帮助" Height="30" Width="40">
+                <MenuItem Header="关于"/>
+                <Separator/>
+                <MenuItem Header="退出"/>
+            </MenuItem>
+        </Menu>
+
+        <!--状态栏-->
+        <StackPanel Width="Auto" Height="25" Background="LightGray" Orientation="Horizontal" DockPanel.Dock="Bottom">
+            <Label Width="Auto" Height="Auto" Content="状态栏" FontFamily="Arial" FontSize="12"/>
+        </StackPanel>
+        <!--Left-->
+        <StackPanel Width="100" Height="Auto" Background="Gray" DockPanel.Dock="Left">
+            <Button Margin="0,0,0,5" Width="Auto" Height="30" Content="导航栏"/>
+            <Button Margin="0,0,0,5" Width="Auto" Height="30" Content="导航栏"/>
+            <Button Margin="0,0,0,5" Width="Auto" Height="30" Content="导航栏"/>
+        </StackPanel>
+
+        <!--Right-->
+        <Grid Width="Auto" Height="Auto" >
+            <Grid.Background>
+                <ImageBrush ImageSource="image/image.jpg" />
+            </Grid.Background>
+        </Grid>
+    </DockPanel>
+</Window>
