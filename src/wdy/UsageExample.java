@@ -57,6 +57,21 @@ public class UsageExample
         return menuBar;
     }
 
+    public static JPanel getRightPanel(){
+        JPanel panel = new JPanel();
+
+        BoxLayout layout=new BoxLayout(panel, BoxLayout.Y_AXIS);
+        panel.setLayout(layout);
+
+        JLabel label = new JLabel("成绩识别:");
+        JTextArea textArea = new JTextArea();
+
+        panel.add(label);
+        panel.add(textArea);
+
+        return panel;
+    }
+
     public static JToolBar getToolBar(){
         JLabel label = new JLabel("状态栏");
 
@@ -79,10 +94,7 @@ public class UsageExample
         frame.setLocationRelativeTo(null);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        /* 创建面板，这个类似于 HTML 的 div 标签
-         * 我们可以创建多个面板并在 JFrame 中指定位置
-         * 面板中我们可以添加文本字段，按钮及其他组件。
-         */
+        // 创建面板
         JPanel panel = new JPanel();
         // 添加面板
         frame.add(panel);
@@ -91,18 +103,20 @@ public class UsageExample
         panel.setLayout(lay);
 
         // 定义面板
-        JPanel panel_left = new JPanel();
-        JPanel panel_right = new JPanel();
+        JPanel panel_center = new JPanel();
 
         // 定义上部菜单栏
         JMenuBar menuBar = getMenuBar();
 
-        //定义下部状态栏
+        // 定义右侧面板
+        JPanel panel_right = getRightPanel();
+
+        // 定义下部状态栏
         JToolBar toolBar = getToolBar();
 
         // 添加到布局
         panel.add(menuBar, "North");
-        panel.add(panel_left, "West");
+        panel.add(panel_center, "Center");
         panel.add(panel_right, "East");
         panel.add(toolBar, "South");
 
