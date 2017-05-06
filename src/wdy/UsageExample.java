@@ -1,69 +1,82 @@
 package wdy;
 
 import javax.swing.*;
+import java.awt.*;
 
 /**
  * Created by Eric on 2017/5/5.
  */
 public class UsageExample
 {
-    private static void placeComponents(JPanel panel) {
+    public static JMenuBar getMenuBar(){
+        JMenuBar menuBar = new JMenuBar();
+        JMenu m1 = new JMenu();
+        m1.setText("文件");
+        JMenu m2 = new JMenu();
+        m2.setText("编辑");
+        JMenu m3 = new JMenu();
+        m3.setText("帮助");
 
-        /* 布局部分我们这边不多做介绍
-         * 这边设置布局为 null
-         */
-        panel.setLayout(null);
+        JMenuItem item11 = new JMenuItem();
+        item11.setText("打开");
+        JMenuItem item12 = new JMenuItem();
+        item12.setText("保存");
+        JMenuItem item13 = new JMenuItem();
+        item13.setText("退出");
 
-        // 创建 JLabel
-        JLabel userLabel = new JLabel("User:");
-        /* 这个方法定义了组件的位置。
-         * setBounds(x, y, width, height)
-         * x 和 y 指定左上角的新位置，由 width 和 height 指定新的大小。
-         */
-        userLabel.setBounds(10,20,80,25);
-        panel.add(userLabel);
+        JMenuItem item21 = new JMenuItem();
+        item21.setText("复制");
+        JMenuItem item22 = new JMenuItem();
+        item22.setText("拷贝");
+        JMenuItem item23 = new JMenuItem();
+        item23.setText("剪切");
 
-        /*
-         * 创建文本域用于用户输入
-         */
-        JTextField userText = new JTextField(20);
-        userText.setBounds(100,20,165,25);
-        panel.add(userText);
+        JMenuItem item31 = new JMenuItem();
+        item31.setText("欢迎");
+        JMenuItem item32 = new JMenuItem();
+        item32.setText("关于");
+        JMenuItem item33 = new JMenuItem();
+        item33.setText("版本信息");
 
-        // 输入密码的文本域
-        JLabel passwordLabel = new JLabel("Password:");
-        passwordLabel.setBounds(10,50,80,25);
-        panel.add(passwordLabel);
+        m1.add(item11);
+        m1.add(item12);
+        m1.add(item13);
 
-        /*
-         *这个类似用于输入的文本域
-         * 但是输入的信息会以点号代替，用于包含密码的安全性
-         */
-        JPasswordField passwordText = new JPasswordField(20);
-        passwordText.setBounds(100,50,165,25);
-        panel.add(passwordText);
+        m2.add(item21);
+        m2.add(item22);
+        m2.add(item23);
 
-        // 创建登录按钮
-        JButton loginButton = new JButton("login");
-        loginButton.setBounds(10, 80, 80, 25);
-        panel.add(loginButton);
+        m3.add(item31);
+        m3.add(item32);
+        m3.add(item33);
+
+        menuBar.add(m1);
+        menuBar.add(m2);
+        menuBar.add(m3);
+
+        return menuBar;
     }
 
-    public static void main(String[] args) {
-        // 显示应用 GUI
-        try
-        {
-            UIManager.put("RootPane.setupButtonVisible", false);
-            org.jb2011.lnf.beautyeye.BeautyEyeLNFHelper.launchBeautyEyeLNF();
-        }
-        catch(Exception e)
-        {
+    public static JToolBar getToolBar(){
+        JLabel label = new JLabel("状态栏");
 
-        }
+        String urlString = "src/wdy/img/green.png";
+        JLabel label_img = new JLabel(new ImageIcon(urlString));
+
+        JToolBar toolBar = new JToolBar();
+
+        toolBar.add(label_img);
+        toolBar.add(label);
+
+        return toolBar;
+    }
+
+    public static void initFrame(){
         // 创建 JFrame 实例
-        JFrame frame = new JFrame("Login Example");
-        // Setting the width and height of frame
-        frame.setSize(350, 200);
+        JFrame frame = new JFrame("中科大成绩识别系统");
+        // 设置 JFrame 尺寸 居中
+        frame.setSize(640, 360);
+        frame.setLocationRelativeTo(null);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         /* 创建面板，这个类似于 HTML 的 div 标签
@@ -73,13 +86,43 @@ public class UsageExample
         JPanel panel = new JPanel();
         // 添加面板
         frame.add(panel);
-        /*
-         * 调用用户定义的方法并添加组件到面板
-         */
-        placeComponents(panel);
+        // 设置布局方式
+        BorderLayout lay = new BorderLayout();
+        panel.setLayout(lay);
+
+        // 定义面板
+        JPanel panel_left = new JPanel();
+        JPanel panel_right = new JPanel();
+
+        // 定义上部菜单栏
+        JMenuBar menuBar = getMenuBar();
+
+        //定义下部状态栏
+        JToolBar toolBar = getToolBar();
+
+        // 添加到布局
+        panel.add(menuBar, "North");
+        panel.add(panel_left, "West");
+        panel.add(panel_right, "East");
+        panel.add(toolBar, "South");
 
         // 设置界面可见
         frame.setVisible(true);
     }
 
+    public static void main(String[] args) {
+        // 显示应用 GUI
+        try
+        {
+            //UIManager.put("RootPane.setupButtonVisible", false);
+            org.jb2011.lnf.beautyeye.BeautyEyeLNFHelper.launchBeautyEyeLNF();
+        }
+        catch(Exception e)
+        {
+            System.out.println(" -- Exception --");
+        }finally
+        {
+            initFrame();
+        }
+    }
 }
