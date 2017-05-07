@@ -2,6 +2,11 @@ package wdy;
 
 import javax.swing.*;
 import java.awt.*;
+import java.applet.AudioClip;
+import java.io.*;
+import java.applet.Applet;
+import java.net.MalformedURLException;
+import java.net.URL;
 
 /**
  * Created by Eric on 2017/5/5.
@@ -32,7 +37,7 @@ public class MainFrame
         item23.setText("剪切");
 
         JMenuItem item31 = new JMenuItem();
-        item31.setText("欢迎");
+        item31.setText("静音");
         JMenuItem item32 = new JMenuItem();
         item32.setText("关于");
         JMenuItem item33 = new JMenuItem();
@@ -59,12 +64,15 @@ public class MainFrame
 
     public static JPanel getRightPanel(){
         JPanel panel = new JPanel();
+        panel.setPreferredSize(new Dimension(250,220));
 
         BoxLayout layout=new BoxLayout(panel, BoxLayout.Y_AXIS);
         panel.setLayout(layout);
 
-        JLabel label = new JLabel("成绩识别:");
+        JLabel label = new JLabel("识别状态:");
         JTextArea textArea = new JTextArea();
+        textArea.setEditable(false);
+        textArea.setBorder(BorderFactory.createEmptyBorder());
 
         panel.add(label);
         panel.add(textArea);
@@ -75,7 +83,7 @@ public class MainFrame
     public static JToolBar getToolBar(){
         JLabel label = new JLabel("状态栏");
 
-        String urlString = "src/wdy/img/green.png";
+        String urlString = "src/wdy/img/red.png";
         JLabel label_img = new JLabel(new ImageIcon(urlString));
 
         JToolBar toolBar = new JToolBar();
@@ -134,9 +142,21 @@ public class MainFrame
         catch(Exception e)
         {
             System.out.println(" -- Exception --");
-        }finally
+        }
+        finally
         {
             initFrame();
+
+            try
+            {
+                File f = new File("src/wdy/audio/bgm.wav"); // 引号里面的是音乐文件所在的路径
+                URL cb = f.toURL();
+                AudioClip aau = Applet.newAudioClip(cb);
+                aau.loop();
+
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            }
         }
     }
 }
