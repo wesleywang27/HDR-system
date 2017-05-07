@@ -6,7 +6,7 @@ import java.awt.*;
 /**
  * Created by Eric on 2017/5/5.
  */
-public class UsageExample
+public class MainFrame
 {
     public static JMenuBar getMenuBar(){
         JMenuBar menuBar = new JMenuBar();
