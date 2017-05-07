@@ -83,30 +83,31 @@ public class MainFrame
         panel_bottom.setLayout(lay);
 
         JLabel label1 = new JLabel("上传文件：");
-        label1.setFont(new Font("宋体", Font.BOLD, 12));
+        label1.setFont(new Font("宋体", Font.BOLD, 16));
         c.fill = GridBagConstraints.HORIZONTAL;
+        c.insets = new Insets(5, 30, 5, 0);
         c.gridx = 0;
         c.gridy = 0;
-        c.insets = new Insets(3, 10, 3, 5);
         panel_bottom.add(label1, c);
 
         JLabel label2 = new JLabel("");
         c.fill = GridBagConstraints.HORIZONTAL;
-        c.weightx = 0.5;
+        c.insets = new Insets(5, 0, 5, 10);
         c.gridx = 1;
         c.gridy = 0;
         panel_bottom.add(label2, c);
 
         JButton bt1 = new JButton("上传");
         c.fill = GridBagConstraints.HORIZONTAL;
-        c.weightx = 0.5;
+        c.insets = new Insets(5, 0, 5, 30);
         c.gridx = 2;
         c.gridy = 0;
         panel_bottom.add(bt1, c);
 
         JLabel label3 = new JLabel("保存路径：");
-        label3.setFont(new Font("宋体", Font.BOLD, 12));
+        label3.setFont(new Font("宋体", Font.BOLD, 16));
         c.fill = GridBagConstraints.HORIZONTAL;
+        c.insets = new Insets(5, 30, 5, 0);
         c.gridx = 0;
         c.gridy = 1;
         panel_bottom.add(label3, c);
@@ -115,25 +116,29 @@ public class MainFrame
         tf1.setEditable(false);
         tf1.setBorder(BorderFactory.createEmptyBorder());
         c.fill = GridBagConstraints.HORIZONTAL;
+        c.insets = new Insets(5, 0, 5, 10);
         c.gridx = 1;
         c.gridy = 1;
         panel_bottom.add(tf1, c);
 
         JButton bt2 = new JButton("更改");
         c.fill = GridBagConstraints.HORIZONTAL;
+        c.insets = new Insets(5, 0, 5, 30);
         c.gridx = 2;
         c.gridy = 1;
         panel_bottom.add(bt2, c);
 
         JLabel label4 = new JLabel("文件名称：");
-        label4.setFont(new Font("宋体", Font.BOLD, 12));
+        label4.setFont(new Font("宋体", Font.BOLD, 16));
         c.fill = GridBagConstraints.HORIZONTAL;
+        c.insets = new Insets(5, 30, 5, 0);
         c.gridx = 0;
         c.gridy = 2;
         panel_bottom.add(label4, c);
 
         JTextField tf2 = new JTextField("");
         c.fill = GridBagConstraints.HORIZONTAL;
+        c.insets = new Insets(5, 0, 5, 10);
         c.gridx = 1;
         c.gridy = 2;
         panel_bottom.add(tf2, c);
@@ -143,6 +148,7 @@ public class MainFrame
         cb.addItem(".xls");
         cb.addItem(".csv");
         c.fill = GridBagConstraints.HORIZONTAL;
+        c.insets = new Insets(5, 0, 5, 30);
         c.gridx = 2;
         c.gridy = 2;
         panel_bottom.add(cb, c);
@@ -164,12 +170,12 @@ public class MainFrame
 
     public static JPanel getRightPanel(){
         JPanel panel = new JPanel();
-        panel.setPreferredSize(new Dimension(250,220));
+        panel.setPreferredSize(new Dimension(288,380));
 
         BoxLayout layout = new BoxLayout(panel, BoxLayout.Y_AXIS);
         panel.setLayout(layout);
 
-        JLabel label = new JLabel("识别状态:");
+        JLabel label = new JLabel("********************识别状态*******************");
         JTextArea textArea = new JTextArea();
         textArea.setEditable(false);
         textArea.setBorder(BorderFactory.createEmptyBorder());
@@ -199,7 +205,7 @@ public class MainFrame
         // 创建 JFrame 实例
         JFrame frame = new JFrame("中科大成绩识别系统");
         // 设置 JFrame 尺寸 居中
-        frame.setSize(640, 360);
+        frame.setSize(720, 405);
         frame.setLocationRelativeTo(null);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
