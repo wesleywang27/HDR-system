@@ -1,5 +1,7 @@
 package wdy;
 
+import org.jb2011.lnf.beautyeye.ch3_button.BEButtonUI;
+
 import javax.swing.*;
 import java.applet.Applet;
 import java.applet.AudioClip;
@@ -69,12 +71,90 @@ public class MainFrame
         panel.setLayout(layout);
 
         JPanel panel_top = new JPanel();
-        JPanel panel_bottom = new JPanel();
 
         String urlString = "src/wdy/img/logo.png";
         JLabel label_img = new JLabel(new ImageIcon(urlString));
-
         panel_top.add(label_img);
+
+        JPanel panel_bottom = new JPanel();
+
+        GridBagLayout lay = new GridBagLayout();
+        GridBagConstraints c = new GridBagConstraints();
+        panel_bottom.setLayout(lay);
+
+        JLabel label1 = new JLabel("上传文件：");
+        label1.setFont(new Font("宋体", Font.BOLD, 12));
+        c.fill = GridBagConstraints.HORIZONTAL;
+        c.gridx = 0;
+        c.gridy = 0;
+        c.insets = new Insets(3, 10, 3, 5);
+        panel_bottom.add(label1, c);
+
+        JLabel label2 = new JLabel("");
+        c.fill = GridBagConstraints.HORIZONTAL;
+        c.weightx = 0.5;
+        c.gridx = 1;
+        c.gridy = 0;
+        panel_bottom.add(label2, c);
+
+        JButton bt1 = new JButton("上传");
+        c.fill = GridBagConstraints.HORIZONTAL;
+        c.weightx = 0.5;
+        c.gridx = 2;
+        c.gridy = 0;
+        panel_bottom.add(bt1, c);
+
+        JLabel label3 = new JLabel("保存路径：");
+        label3.setFont(new Font("宋体", Font.BOLD, 12));
+        c.fill = GridBagConstraints.HORIZONTAL;
+        c.gridx = 0;
+        c.gridy = 1;
+        panel_bottom.add(label3, c);
+
+        JTextField tf1 = new JTextField("C:\\Users\\Public\\Documents");
+        tf1.setEditable(false);
+        tf1.setBorder(BorderFactory.createEmptyBorder());
+        c.fill = GridBagConstraints.HORIZONTAL;
+        c.gridx = 1;
+        c.gridy = 1;
+        panel_bottom.add(tf1, c);
+
+        JButton bt2 = new JButton("更改");
+        c.fill = GridBagConstraints.HORIZONTAL;
+        c.gridx = 2;
+        c.gridy = 1;
+        panel_bottom.add(bt2, c);
+
+        JLabel label4 = new JLabel("文件名称：");
+        label4.setFont(new Font("宋体", Font.BOLD, 12));
+        c.fill = GridBagConstraints.HORIZONTAL;
+        c.gridx = 0;
+        c.gridy = 2;
+        panel_bottom.add(label4, c);
+
+        JTextField tf2 = new JTextField("");
+        c.fill = GridBagConstraints.HORIZONTAL;
+        c.gridx = 1;
+        c.gridy = 2;
+        panel_bottom.add(tf2, c);
+
+        JComboBox cb = new JComboBox();
+        cb.addItem(".xlsx");
+        cb.addItem(".xls");
+        cb.addItem(".csv");
+        c.fill = GridBagConstraints.HORIZONTAL;
+        c.gridx = 2;
+        c.gridy = 2;
+        panel_bottom.add(cb, c);
+
+        JButton bt3 = new JButton("执行");
+        bt3.setForeground(Color.white);
+        bt3.setFont(new Font("粗体", Font.BOLD, 12));
+        bt3.setUI(new BEButtonUI().setNormalColor(BEButtonUI.NormalColor.lightBlue));
+        c.fill = GridBagConstraints.HORIZONTAL;
+        c.gridx = 2;
+        c.gridy = 3;
+        panel_bottom.add(bt3, c);
 
         panel.add(panel_top);
         panel.add(panel_bottom);
@@ -102,6 +182,7 @@ public class MainFrame
 
     public static JToolBar getToolBar(){
         JLabel label = new JLabel("状态栏");
+        label.setFont(new Font("宋体", Font.PLAIN, 12));
 
         String urlString = "src/wdy/img/red.png";
         JLabel label_img = new JLabel(new ImageIcon(urlString));
