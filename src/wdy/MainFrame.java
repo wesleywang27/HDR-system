@@ -1,10 +1,10 @@
 package wdy;
 
 import javax.swing.*;
-import java.awt.*;
-import java.applet.AudioClip;
-import java.io.*;
 import java.applet.Applet;
+import java.applet.AudioClip;
+import java.awt.*;
+import java.io.File;
 import java.net.MalformedURLException;
 import java.net.URL;
 
@@ -62,11 +62,31 @@ public class MainFrame
         return menuBar;
     }
 
+    public static JPanel getMainPanel(){
+        JPanel panel = new JPanel();
+
+        BoxLayout layout = new BoxLayout(panel, BoxLayout.Y_AXIS);
+        panel.setLayout(layout);
+
+        JPanel panel_top = new JPanel();
+        JPanel panel_bottom = new JPanel();
+
+        String urlString = "src/wdy/img/logo.png";
+        JLabel label_img = new JLabel(new ImageIcon(urlString));
+
+        panel_top.add(label_img);
+
+        panel.add(panel_top);
+        panel.add(panel_bottom);
+
+        return panel;
+    }
+
     public static JPanel getRightPanel(){
         JPanel panel = new JPanel();
         panel.setPreferredSize(new Dimension(250,220));
 
-        BoxLayout layout=new BoxLayout(panel, BoxLayout.Y_AXIS);
+        BoxLayout layout = new BoxLayout(panel, BoxLayout.Y_AXIS);
         panel.setLayout(layout);
 
         JLabel label = new JLabel("识别状态:");
@@ -110,11 +130,11 @@ public class MainFrame
         BorderLayout lay = new BorderLayout();
         panel.setLayout(lay);
 
-        // 定义面板
-        JPanel panel_center = new JPanel();
-
         // 定义上部菜单栏
         JMenuBar menuBar = getMenuBar();
+
+        // 定义主面板
+        JPanel panel_center = getMainPanel();
 
         // 定义右侧面板
         JPanel panel_right = getRightPanel();
