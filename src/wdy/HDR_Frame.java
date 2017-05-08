@@ -6,14 +6,19 @@ import javax.swing.*;
 import java.applet.Applet;
 import java.applet.AudioClip;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.File;
+import java.io.IOException;
 import java.net.MalformedURLException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.net.URL;
 
 /**
  * Created by Eric on 2017/5/8.
  */
-public class HDR_Frame {
+public class HDR_Frame extends JFrame implements ActionListener {
     private JFrame mainFrame;
     private AudioClip bgm;
     private JLabel icon;
@@ -51,7 +56,7 @@ public class HDR_Frame {
         panel.setLayout(lay);
 
         // 定义上部菜单栏
-        JMenuBar menuBar = this.getMenuBar();
+        JMenuBar menuBar = this.getTopBar();
 
         // 定义主面板
         JPanel panel_center = this.getMainPanel();
@@ -60,7 +65,7 @@ public class HDR_Frame {
         JPanel panel_right = this.getRightPanel();
 
         // 定义下部状态栏
-        JToolBar toolBar = this.getToolBar();
+        JToolBar toolBar = this.getBottomBar();
 
         // 添加到布局
         panel.add(menuBar, "North");
@@ -82,7 +87,7 @@ public class HDR_Frame {
         this.mainFrame.setVisible(true);
     }
 
-    public JMenuBar getMenuBar(){
+    public JMenuBar getTopBar(){
         JMenuBar menuBar = new JMenuBar();
 
         JMenu m1 = new JMenu();
@@ -128,6 +133,11 @@ public class HDR_Frame {
         menuBar.add(m1);
         menuBar.add(m2);
         menuBar.add(m3);
+
+        item11.addActionListener(this);
+        item13.addActionListener(this);
+        item31.addActionListener(this);
+        item33.addActionListener(this);
 
         return menuBar;
     }
@@ -255,7 +265,7 @@ public class HDR_Frame {
         return panel;
     }
 
-    public JToolBar getToolBar(){
+    public JToolBar getBottomBar(){
         JToolBar toolBar = new JToolBar();
 
         JLabel label = new JLabel("状态栏");
@@ -268,6 +278,37 @@ public class HDR_Frame {
         toolBar.add(label);
 
         return toolBar;
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        String source = e.getActionCommand();
+        switch (source){
+            case "打开":
+                try {
+                    URI uri = new URI("http://www.baidu.com");
+                    Desktop.getDesktop().browse(uri);
+                } catch (URISyntaxException ue) {
+                    ue.printStackTrace();
+                } catch (IOException ie) {
+                    ie.printStackTrace();
+                }
+                break;
+            case "退出":
+                System.exit(0);
+                break;
+            case "静音":
+                this.bgm.stop();
+                item31.setText("音乐");
+                break;
+            case "音乐":
+                this.bgm.loop();
+                item31.setText("静音");
+                break;
+            case "版本信息":
+                JOptionPane.showMessageDialog(null, "版权所有®中国科学技术大学软件学院", "版本信息", JOptionPane.INFORMATION_MESSAGE);
+                break;
+        }
     }
 
     public static void main(String[] args){
