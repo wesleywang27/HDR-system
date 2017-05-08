@@ -239,11 +239,33 @@ public class HDR_Frame {
     public JPanel getRightPanel(){
         JPanel panel = new JPanel();
 
+        panel.setPreferredSize(new Dimension(288,380));
+
+        BoxLayout layout = new BoxLayout(panel, BoxLayout.Y_AXIS);
+        panel.setLayout(layout);
+
+        JLabel label = new JLabel("********************识别状态*******************");
+        this.status = new JTextArea();
+        status.setEditable(false);
+        status.setBorder(BorderFactory.createEmptyBorder());
+
+        panel.add(label);
+        panel.add(status);
+
         return panel;
     }
 
     public JToolBar getToolBar(){
         JToolBar toolBar = new JToolBar();
+
+        JLabel label = new JLabel("状态栏");
+        label.setFont(new Font("宋体", Font.PLAIN, 12));
+
+        String urlString = "src/wdy/img/red.png";
+        this.icon = new JLabel(new ImageIcon(urlString));
+
+        toolBar.add(icon);
+        toolBar.add(label);
 
         return toolBar;
     }
