@@ -3,6 +3,7 @@ package wdy;
 import org.jb2011.lnf.beautyeye.ch3_button.BEButtonUI;
 
 import javax.swing.*;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import java.applet.Applet;
 import java.applet.AudioClip;
 import java.awt.*;
@@ -14,6 +15,8 @@ import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  * Created by Eric on 2017/5/8.
@@ -214,7 +217,10 @@ public class HDR_Frame extends JFrame implements ActionListener {
         c.gridy = 2;
         panel_bottom.add(label4, c);
 
-        this.fileName = new JTextField("");
+        Date now = new Date();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMdd_hhMMss");
+        String file = dateFormat.format( now );
+        this.fileName = new JTextField(file);
         c.fill = GridBagConstraints.HORIZONTAL;
         c.insets = new Insets(5, 0, 5, 10);
         c.gridx = 1;
@@ -242,6 +248,10 @@ public class HDR_Frame extends JFrame implements ActionListener {
 
         panel.add(panel_top);
         panel.add(panel_bottom);
+
+        upload.addActionListener(this);
+        updateURL.addActionListener(this);
+        execute.addActionListener(this);
 
         return panel;
     }
@@ -294,19 +304,70 @@ public class HDR_Frame extends JFrame implements ActionListener {
                     ie.printStackTrace();
                 }
                 break;
+
             case "退出":
                 System.exit(0);
                 break;
+
             case "静音":
                 this.bgm.stop();
                 item31.setText("音乐");
                 break;
+
             case "音乐":
                 this.bgm.loop();
                 item31.setText("静音");
                 break;
+
             case "版本信息":
                 JOptionPane.showMessageDialog(null, "版权所有®中国科学技术大学软件学院", "版本信息", JOptionPane.INFORMATION_MESSAGE);
+                break;
+
+            case "上传":
+                JFileChooser jfc = new JFileChooser();
+                FileNameExtensionFilter filter = new FileNameExtensionFilter("压缩文件(*.rar;*.zip)", "rar", "zip");
+
+                jfc.setFileSelectionMode(JFileChooser.FILES_ONLY);
+                jfc.setFileFilter(filter);
+                jfc.showDialog(new JLabel(), "选择");
+
+                File file = jfc.getSelectedFile();
+                if(file != null){
+                    this.uploadStatus.setText("上传成功！");
+                    //System.out.println("文件:"+file.getAbsolutePath());
+                    //System.out.println(jfc.getSelectedFile().getName());
+                }
+                else{
+                    this.uploadStatus.setText("");
+                }
+
+                break;
+
+            case "更改":
+                jfc = new JFileChooser();
+
+                jfc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+                jfc.showDialog(new JLabel(), "选择");
+
+                file = jfc.getSelectedFile();
+                if(file != null){
+                    this.savedURL.setText(file.getAbsolutePath());
+                    //System.out.println("文件:"+file.getAbsolutePath());
+                    //System.out.println(jfc.getSelectedFile().getName());
+                }
+
+                break;
+
+            case "执行":
+                this.execute.setText("停止");
+                this.icon.setIcon((new ImageIcon("src/wdy/img/green.png")));
+
+                break;
+
+            case "停止":
+                this.execute.setText("执行");
+                this.icon.setIcon((new ImageIcon("src/wdy/img/red.png")));
+
                 break;
         }
     }
