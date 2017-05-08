@@ -3,6 +3,7 @@ package wdy;
 import org.jb2011.lnf.beautyeye.ch3_button.BEButtonUI;
 
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import java.applet.Applet;
 import java.applet.AudioClip;
@@ -193,9 +194,9 @@ public class HDR_Frame extends JFrame implements ActionListener {
         c.gridy = 1;
         panel_bottom.add(label3, c);
 
-        this.savedURL = new JTextField("C:\\Users\\Public\\Documents");
+        this.savedURL = new JTextField("C:\\Users\\Eric\\Documents", 23);
         savedURL.setEditable(false);
-        savedURL.setBorder(BorderFactory.createEmptyBorder());
+        savedURL.setBorder(new EmptyBorder(0,0,0,0));
         c.fill = GridBagConstraints.HORIZONTAL;
         c.insets = new Insets(5, 0, 5, 10);
         c.gridx = 1;
@@ -219,7 +220,7 @@ public class HDR_Frame extends JFrame implements ActionListener {
 
         Date now = new Date();
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMdd_hhMMss");
-        String file = dateFormat.format( now );
+        String file = dateFormat.format(now);
         this.fileName = new JTextField(file);
         c.fill = GridBagConstraints.HORIZONTAL;
         c.insets = new Insets(5, 0, 5, 10);
