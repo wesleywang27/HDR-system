@@ -368,9 +368,11 @@ public class HDR_Frame extends JFrame implements ActionListener {
 
                     this.outPath = this.savedURL.getText();
                     this.file = this.fileName.getText() + this.fileType.getSelectedItem();
+
+                    this.recognize(this.srcPath, this.outPath, this.file, this.execute, this.icon, this.status);
                 }
                 else{
-                    JOptionPane.showMessageDialog(null, "请上传压缩包文件", "错误信息", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "请上传压缩包文件！", "错误信息", JOptionPane.ERROR_MESSAGE);
                 }
 
                 break;
@@ -381,6 +383,15 @@ public class HDR_Frame extends JFrame implements ActionListener {
 
                 break;
         }
+    }
+
+    public void recognize(String srcPath, String outPath, String file, JButton btn, JLabel lb, JTextArea ta){
+        Recognizer rc = new Recognizer(srcPath, outPath, file, btn, lb, ta);
+        rc.recognize();
+
+        System.out.println("识别完毕！");
+        this.execute.setText("执行");
+        this.icon.setIcon((new ImageIcon("src/wdy/img/red.png")));
     }
 
     public static void main(String[] args){
