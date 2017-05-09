@@ -24,6 +24,6 @@ public class Recognizer {
     }
 
     public void recognize(){
-        
+
     }
 }
