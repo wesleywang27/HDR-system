@@ -5,7 +5,7 @@ import javax.swing.*;
 /**
  * Created by Eric on 2017/5/9.
  */
-public class Recognizer {
+public class Recognizer implements Runnable{
     private String srcPath;
     private String outPath;
     private String file;
@@ -24,6 +24,17 @@ public class Recognizer {
     }
 
     public void recognize(){
+        Thread thread = new Thread(this);
+        thread.start();
+    }
 
+    @Override
+    public void run() {
+        for(int i = 0; i < 1000; i++){
+            for(int j = 0; j < 100; j++){
+                System.out.println(this.srcPath+this.outPath+this.file+this.btn.getText()+this.lb.getText()+this.ta.getText());
+            }
+        }
+        lb.setIcon((new ImageIcon("src/wdy/img/red.png")));
     }
 }
