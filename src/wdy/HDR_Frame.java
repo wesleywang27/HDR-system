@@ -46,6 +46,10 @@ public class HDR_Frame extends JFrame implements ActionListener {
     private JButton execute;
     private JTextArea status;
 
+    private String srcPath;
+    private String outPath;
+    private String file;
+
     public HDR_Frame(){
         this.mainFrame = new JFrame("中科大成绩识别系统");
         this.mainFrame.setSize(720, 405);
@@ -335,7 +339,7 @@ public class HDR_Frame extends JFrame implements ActionListener {
                 File file = jfc.getSelectedFile();
                 if(file != null){
                     this.uploadStatus.setText("上传成功！");
-                    //System.out.println("文件:"+file.getAbsolutePath());
+                    this.srcPath = file.getAbsolutePath();
                     //System.out.println(jfc.getSelectedFile().getName());
                 }
                 else{
@@ -353,15 +357,21 @@ public class HDR_Frame extends JFrame implements ActionListener {
                 file = jfc.getSelectedFile();
                 if(file != null){
                     this.savedURL.setText(file.getAbsolutePath());
-                    //System.out.println("文件:"+file.getAbsolutePath());
-                    //System.out.println(jfc.getSelectedFile().getName());
                 }
 
                 break;
 
             case "执行":
-                this.execute.setText("停止");
-                this.icon.setIcon((new ImageIcon("src/wdy/img/green.png")));
+                if(this.uploadStatus.getText().equals("上传成功！")){
+                    this.execute.setText("停止");
+                    this.icon.setIcon((new ImageIcon("src/wdy/img/green.png")));
+
+                    this.outPath = this.savedURL.getText();
+                    this.file = this.fileName.getText() + this.fileType.getSelectedItem();
+                }
+                else{
+                    JOptionPane.showMessageDialog(null, "请上传压缩包文件", "错误信息", JOptionPane.ERROR_MESSAGE);
+                }
 
                 break;
 
