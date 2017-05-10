@@ -22,7 +22,7 @@ import java.util.Date;
 /**
  * Created by Eric on 2017/5/8.
  */
-public class HDR_Frame extends JFrame implements ActionListener {
+public class MainFrame extends JFrame implements ActionListener {
     private JFrame mainFrame;
     private AudioClip bgm;
     private JLabel icon;
@@ -52,7 +52,7 @@ public class HDR_Frame extends JFrame implements ActionListener {
 
     private Recognizer rc;
 
-    private HDR_Frame(){
+    private MainFrame(){
         this.mainFrame = new JFrame("中科大成绩识别系统");
         this.mainFrame.setSize(720, 405);
         this.mainFrame.setLocationRelativeTo(null);
@@ -402,7 +402,7 @@ public class HDR_Frame extends JFrame implements ActionListener {
         }
         finally
         {
-            HDR_Frame mFrame = new HDR_Frame();
+            MainFrame mFrame = new MainFrame();
             mFrame.init();
         }
     }
