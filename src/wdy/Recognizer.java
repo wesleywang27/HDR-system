@@ -1,5 +1,7 @@
 package wdy;
 
+import org.python.util.PythonInterpreter;
+
 import javax.swing.*;
 
 /**
@@ -36,6 +38,9 @@ public class Recognizer implements Runnable{
         Printer p = new Printer(ta, "\n\t....正在解压文件....");
         p.print();
 
+        PythonInterpreter interpreter = new PythonInterpreter();
+        interpreter.execfile("src/wdy/py/unzip.py");
+
         p.setMsg("\n100% 解压文件成功！");
         p.print();
     }
@@ -43,6 +48,9 @@ public class Recognizer implements Runnable{
     private void split(){
         Printer p = new Printer(ta, "\n\t....正在图片分割....");
         p.print();
+
+        PythonInterpreter interpreter = new PythonInterpreter();
+        interpreter.execfile("src/wdy/py/split.py");
 
         p.setMsg("\n100% 图片分割成功！");
         p.print();
@@ -52,6 +60,9 @@ public class Recognizer implements Runnable{
         Printer p = new Printer(ta, "\n\t....正在成绩识别....");
         p.print();
 
+        PythonInterpreter interpreter = new PythonInterpreter();
+        interpreter.execfile("src/wdy/py/recognize.py");
+
         p.setMsg("\n100% 成绩识别成功！");
         p.print();
     }
@@ -59,6 +70,9 @@ public class Recognizer implements Runnable{
     private void generate(){
         Printer p = new Printer(ta, "\n\t....正在生成文件....");
         p.print();
+
+        PythonInterpreter interpreter = new PythonInterpreter();
+        interpreter.execfile("src/wdy/py/generate.py");
 
         p.setMsg("\n100% 生成文件成功！");
         p.print();
@@ -68,6 +82,9 @@ public class Recognizer implements Runnable{
         Printer p = new Printer(ta, "\n\t....正在上传数据....");
         p.print();
 
+        PythonInterpreter interpreter = new PythonInterpreter();
+        interpreter.execfile("src/wdy/py/upload.py");
+
         p.setMsg("\n100% 上传数据成功！");
         p.print();
     }
@@ -75,6 +92,9 @@ public class Recognizer implements Runnable{
     private void clean(){
         Printer p = new Printer(ta, "\n\t....正在清理环境....");
         p.print();
+
+        PythonInterpreter interpreter = new PythonInterpreter();
+        interpreter.execfile("src/wdy/py/clean.py");
 
         p.setMsg("\n100% 清理环境成功！");
         p.print();
