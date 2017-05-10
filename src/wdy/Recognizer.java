@@ -34,27 +34,33 @@ public class Recognizer implements Runnable{
     }
 
     private void unzip(){
-
+        Printer p = new Printer(ta, "\n\t解压缩");
+        p.print();
     }
 
     private void split(){
-
+        Printer p = new Printer(ta, "\n\t图片分割");
+        p.print();
     }
 
     private void recognize(){
-
+        Printer p = new Printer(ta, "\n\t成绩识别");
+        p.print();
     }
 
     private void generate(){
-
+        Printer p = new Printer(ta, "\n\t生成文件");
+        p.print();
     }
 
     private void upload(){
-
+        Printer p = new Printer(ta, "\n\t上传数据");
+        p.print();
     }
 
     private void clean(){
-
+        Printer p = new Printer(ta, "\n\t清理环境");
+        p.print();
     }
 
     void stop(){
@@ -70,18 +76,18 @@ public class Recognizer implements Runnable{
 
     @Override
     public void run() {
-        for(int i = 0; i < 1000; i++){
-            for(int j = 0; j < 1000; j++){
-                System.out.println(this.srcPath+this.outPath+this.file+this.btn.getText()+this.lb.getText()+this.ta.getText());
-            }
-        }
-
         this.unzip();
         this.split();
         this.recognize();
         this.generate();
         this.upload();
         this.clean();
+
+        for(int i = 0; i < 1000; i++){
+            for(int j = 0; j < 1000; j++){
+                System.out.println(this.srcPath+this.outPath+this.file+this.btn.getText()+this.lb.getText()+this.ta.getText());
+            }
+        }
 
         btn.setText("执行");
         lb.setIcon((new ImageIcon("src/wdy/img/red.png")));
