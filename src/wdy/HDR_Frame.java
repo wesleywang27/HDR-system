@@ -52,7 +52,7 @@ public class HDR_Frame extends JFrame implements ActionListener {
 
     private Recognizer rc;
 
-    public HDR_Frame(){
+    private HDR_Frame(){
         this.mainFrame = new JFrame("中科大成绩识别系统");
         this.mainFrame.setSize(720, 405);
         this.mainFrame.setLocationRelativeTo(null);
@@ -95,11 +95,11 @@ public class HDR_Frame extends JFrame implements ActionListener {
         this.rc = new Recognizer();
     }
 
-    public void init(){
+    private void init(){
         this.mainFrame.setVisible(true);
     }
 
-    public JMenuBar getTopBar(){
+    private JMenuBar getTopBar(){
         JMenuBar menuBar = new JMenuBar();
 
         JMenu m1 = new JMenu();
@@ -154,7 +154,7 @@ public class HDR_Frame extends JFrame implements ActionListener {
         return menuBar;
     }
 
-    public JPanel getMainPanel(){
+    private JPanel getMainPanel(){
         JPanel panel = new JPanel();
 
         BoxLayout layout = new BoxLayout(panel, BoxLayout.Y_AXIS);
@@ -265,7 +265,7 @@ public class HDR_Frame extends JFrame implements ActionListener {
         return panel;
     }
 
-    public JPanel getRightPanel(){
+    private JPanel getRightPanel(){
         JPanel panel = new JPanel();
 
         panel.setPreferredSize(new Dimension(288,380));
@@ -282,7 +282,7 @@ public class HDR_Frame extends JFrame implements ActionListener {
         return panel;
     }
 
-    public JToolBar getBottomBar(){
+    private JToolBar getBottomBar(){
         JToolBar toolBar = new JToolBar();
 
         JLabel label = new JLabel("状态栏");

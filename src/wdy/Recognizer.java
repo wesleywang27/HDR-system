@@ -16,7 +16,7 @@ public class Recognizer implements Runnable{
 
     private static Thread thread;
 
-    public void setVar(String srcPath, String outPath, String file, JButton btn, JLabel lb, JTextArea ta){
+    void setVar(String srcPath, String outPath, String file, JButton btn, JLabel lb, JTextArea ta){
         this.srcPath = srcPath;
         this.outPath = outPath;
         this.file = file;
@@ -25,23 +25,47 @@ public class Recognizer implements Runnable{
         this.ta = ta;
     }
 
-    public void init(){
-        ta.setText("    .........正在启动程序.........");
+    void init(){
 
-        this.thread = new Thread(this);
-        this.thread.start();
+        thread = new Thread(this);
+        thread.start();
+
+        ta.setText("\n\t ......程序启动......");
     }
 
-    public void recognize(){
+    private void unzip(){
 
     }
 
-    public void stop(){
+    private void split(){
+
+    }
+
+    private void recognize(){
+
+    }
+
+    private void generate(){
+
+    }
+
+    private void upload(){
+
+    }
+
+    private void clean(){
+
+    }
+
+    void stop(){
+
+        thread.stop();
+
+        this.clean();
+
         String str = this.ta.getText();
         str += "\n\t ......程序停止......";
         ta.setText(str);
-
-        this.thread.stop();
     }
 
     @Override
@@ -51,6 +75,13 @@ public class Recognizer implements Runnable{
                 System.out.println(this.srcPath+this.outPath+this.file+this.btn.getText()+this.lb.getText()+this.ta.getText());
             }
         }
+
+        this.unzip();
+        this.split();
+        this.recognize();
+        this.generate();
+        this.upload();
+        this.clean();
 
         btn.setText("执行");
         lb.setIcon((new ImageIcon("src/wdy/img/red.png")));
