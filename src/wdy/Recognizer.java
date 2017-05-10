@@ -26,51 +26,67 @@ public class Recognizer implements Runnable{
     }
 
     void init(){
-
         thread = new Thread(this);
         thread.start();
 
-        ta.setText("\n\t ......程序启动......");
+        ta.setText("..............程序启动..............");
     }
 
     private void unzip(){
-        Printer p = new Printer(ta, "\n\t解压缩");
+        Printer p = new Printer(ta, "\n\t....正在解压文件....");
+        p.print();
+
+        p.setMsg("\n100% 解压文件成功！");
         p.print();
     }
 
     private void split(){
-        Printer p = new Printer(ta, "\n\t图片分割");
+        Printer p = new Printer(ta, "\n\t....正在图片分割....");
+        p.print();
+
+        p.setMsg("\n100% 图片分割成功！");
         p.print();
     }
 
     private void recognize(){
-        Printer p = new Printer(ta, "\n\t成绩识别");
+        Printer p = new Printer(ta, "\n\t....正在成绩识别....");
+        p.print();
+
+        p.setMsg("\n100% 成绩识别成功！");
         p.print();
     }
 
     private void generate(){
-        Printer p = new Printer(ta, "\n\t生成文件");
+        Printer p = new Printer(ta, "\n\t....正在生成文件....");
+        p.print();
+
+        p.setMsg("\n100% 生成文件成功！");
         p.print();
     }
 
     private void upload(){
-        Printer p = new Printer(ta, "\n\t上传数据");
+        Printer p = new Printer(ta, "\n\t....正在上传数据....");
+        p.print();
+
+        p.setMsg("\n100% 上传数据成功！");
         p.print();
     }
 
     private void clean(){
-        Printer p = new Printer(ta, "\n\t清理环境");
+        Printer p = new Printer(ta, "\n\t....正在清理环境....");
+        p.print();
+
+        p.setMsg("\n100% 清理环境成功！");
         p.print();
     }
 
     void stop(){
-
         thread.stop();
 
         this.clean();
 
         String str = this.ta.getText();
-        str += "\n\t ......程序停止......";
+        str += "\n..............程序结束..............";
         ta.setText(str);
     }
 
@@ -83,11 +99,8 @@ public class Recognizer implements Runnable{
         this.upload();
         this.clean();
 
-        for(int i = 0; i < 1000; i++){
-            for(int j = 0; j < 1000; j++){
-                System.out.println(this.srcPath+this.outPath+this.file+this.btn.getText()+this.lb.getText()+this.ta.getText());
-            }
-        }
+        Printer p = new Printer(ta, "\n识别成功！");
+        p.print();
 
         btn.setText("执行");
         lb.setIcon((new ImageIcon("src/wdy/img/red.png")));

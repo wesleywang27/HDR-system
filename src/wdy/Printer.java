@@ -14,8 +14,17 @@ public class Printer implements Runnable {
         this.msg = msg;
     }
 
+    void setMsg(String msg){
+        this.msg = msg;
+    }
+
     void print(){
         Thread thread = new Thread(this);
+        try {
+            thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         thread.run();
     }
 
