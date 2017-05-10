@@ -50,6 +50,8 @@ public class HDR_Frame extends JFrame implements ActionListener {
     private String outPath;
     private String file;
 
+    private Recognizer rc;
+
     public HDR_Frame(){
         this.mainFrame = new JFrame("中科大成绩识别系统");
         this.mainFrame.setSize(720, 405);
@@ -89,6 +91,8 @@ public class HDR_Frame extends JFrame implements ActionListener {
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
+
+        this.rc = new Recognizer();
     }
 
     public void init(){
@@ -298,6 +302,7 @@ public class HDR_Frame extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         String source = e.getActionCommand();
+
         switch (source){
             case "打开":
                 try {
@@ -369,8 +374,12 @@ public class HDR_Frame extends JFrame implements ActionListener {
                     this.outPath = this.savedURL.getText();
                     this.file = this.fileName.getText() + this.fileType.getSelectedItem();
 
-                    Recognizer rc = new Recognizer(this.srcPath, this.outPath, this.file, this.execute, this.icon, this.status);
-                    rc.recognize();
+                    rc.setVar(this.srcPath, this.outPath, this.file, this.execute, this.icon, this.status);
+                    try {
+                        rc.init();
+                    } catch (InterruptedException e1) {
+                        e1.printStackTrace();
+                    }
                 }
                 else{
                     JOptionPane.showMessageDialog(null, "请上传压缩包文件！", "错误信息", JOptionPane.ERROR_MESSAGE);
@@ -381,6 +390,12 @@ public class HDR_Frame extends JFrame implements ActionListener {
             case "停止":
                 this.execute.setText("执行");
                 this.icon.setIcon((new ImageIcon("src/wdy/img/red.png")));
+
+                try {
+                    rc.stop();
+                } catch (InterruptedException e1) {
+                    e1.printStackTrace();
+                }
 
                 break;
         }
