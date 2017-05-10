@@ -273,12 +273,10 @@ public class HDR_Frame extends JFrame implements ActionListener {
         BoxLayout layout = new BoxLayout(panel, BoxLayout.Y_AXIS);
         panel.setLayout(layout);
 
-        JLabel label = new JLabel("********************识别状态*******************");
         this.status = new JTextArea();
         status.setEditable(false);
         status.setBorder(BorderFactory.createEmptyBorder());
 
-        panel.add(label);
         panel.add(status);
 
         return panel;
@@ -375,11 +373,7 @@ public class HDR_Frame extends JFrame implements ActionListener {
                     this.file = this.fileName.getText() + this.fileType.getSelectedItem();
 
                     rc.setVar(this.srcPath, this.outPath, this.file, this.execute, this.icon, this.status);
-                    try {
-                        rc.init();
-                    } catch (InterruptedException e1) {
-                        e1.printStackTrace();
-                    }
+                    rc.init();
                 }
                 else{
                     JOptionPane.showMessageDialog(null, "请上传压缩包文件！", "错误信息", JOptionPane.ERROR_MESSAGE);
@@ -391,11 +385,7 @@ public class HDR_Frame extends JFrame implements ActionListener {
                 this.execute.setText("执行");
                 this.icon.setIcon((new ImageIcon("src/wdy/img/red.png")));
 
-                try {
-                    rc.stop();
-                } catch (InterruptedException e1) {
-                    e1.printStackTrace();
-                }
+                rc.stop();
 
                 break;
         }
