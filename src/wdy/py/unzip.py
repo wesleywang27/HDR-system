@@ -1,3 +1,3 @@
 # -*- coding: utf-8 -*-
-
-print "解压\n"
+def adder(a, b):
+    return a + b

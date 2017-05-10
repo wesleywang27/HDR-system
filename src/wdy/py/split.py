@@ -1,3 +1,3 @@
 # -*- coding: utf-8 -*-
 
-print "切割\n"
+print "切割"

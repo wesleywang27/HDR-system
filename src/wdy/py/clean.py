@@ -1,3 +1,3 @@
 # -*- coding: utf-8 -*-
 
-print "清理\n"
+print "清理"

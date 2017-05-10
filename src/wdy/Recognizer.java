@@ -1,5 +1,8 @@
 package wdy;
 
+import org.python.core.PyFunction;
+import org.python.core.PyInteger;
+import org.python.core.PyObject;
 import org.python.util.PythonInterpreter;
 
 import javax.swing.*;
@@ -40,6 +43,11 @@ public class Recognizer implements Runnable{
 
         PythonInterpreter interpreter = new PythonInterpreter();
         interpreter.execfile("src/wdy/py/unzip.py");
+        PyFunction func = interpreter.get("adder", PyFunction.class);
+
+        int a = 2010, b = 7;
+        PyObject obj = func.__call__(new PyInteger(a), new PyInteger(b));
+        System.out.println("answer = " + obj.toString());
 
         p.setMsg("\n100% 解压文件成功！");
         p.print();
