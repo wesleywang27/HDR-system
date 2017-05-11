@@ -1,3 +1,7 @@
 # -*- coding: utf-8 -*-
+import shutil
+import sys
 
-print "清理"
+
+if __name__ == '__main__':
+    shutil.rmtree(sys.argv[1] + "\\HDR-system")

@@ -385,7 +385,13 @@ public class MainFrame extends JFrame implements ActionListener {
                 this.execute.setText("执行");
                 this.icon.setIcon((new ImageIcon("src/wdy/img/red.png")));
 
-                rc.stop();
+                try {
+                    rc.stop();
+                } catch (IOException e1) {
+                    e1.printStackTrace();
+                } catch (InterruptedException e1) {
+                    e1.printStackTrace();
+                }
 
                 break;
         }

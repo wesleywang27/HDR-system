@@ -1,6 +1,7 @@
 # coding=utf-8
 import os
 import os.path
+import shutil
 import sys
 import zipfile
 
@@ -18,4 +19,13 @@ def un_zip(file_name, dir):
 
 
 if __name__ == '__main__':
-    un_zip(sys.argv[1], sys.argv[2])
+    isExists = os.path.exists(sys.argv[2] + "\\HDR-system")
+
+    if isExists:
+        # 如果存在则删除原有目录
+        shutil.rmtree(sys.argv[2] + "\\HDR-system")
+
+    os.makedirs(sys.argv[2] + "\\HDR-system")
+    os.makedirs(sys.argv[2] + "\\HDR-system\\src")
+
+    un_zip(sys.argv[1], sys.argv[2] + "\\HDR-system\\src")

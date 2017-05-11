@@ -39,7 +39,7 @@ public class Recognizer implements Runnable{
         Printer p = new Printer(ta, "\n\t....正在解压文件....");
         p.print();
 
-        Process proc = Runtime.getRuntime().exec("python src/wdy/py/unzip.py " + srcPath + " " + outPath + "\\HDR-system\\src");
+        Process proc = Runtime.getRuntime().exec("python src/wdy/py/unzip.py " + srcPath + " " + outPath);
         proc.waitFor();
 
         p.setMsg("\n100% 解压文件成功！");
@@ -86,17 +86,18 @@ public class Recognizer implements Runnable{
         p.print();
     }
 
-    private void clean(){
+    private void clean() throws IOException, InterruptedException {
         Printer p = new Printer(ta, "\n\t....正在清理环境....");
         p.print();
 
-
+        Process proc = Runtime.getRuntime().exec("python src/wdy/py/clean.py " + outPath);
+        proc.waitFor();
 
         p.setMsg("\n100% 清理环境成功！");
         p.print();
     }
 
-    void stop(){
+    void stop() throws IOException, InterruptedException {
         thread.stop();
 
         this.clean();
@@ -110,16 +111,16 @@ public class Recognizer implements Runnable{
     public void run() {
         try {
             this.unzip();
+            this.split();
+            this.recognize();
+            this.generate();
+            this.upload();
+            this.clean();
         } catch (IOException e) {
             e.printStackTrace();
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        this.split();
-        this.recognize();
-        this.generate();
-        this.upload();
-        this.clean();
 
         Printer p = new Printer(ta, "\n识别成功！");
         p.print();
