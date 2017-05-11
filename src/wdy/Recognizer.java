@@ -1,8 +1,7 @@
 package wdy;
 
-import org.python.util.PythonInterpreter;
-
 import javax.swing.*;
+import java.io.IOException;
 
 /**
  * Created by Eric on 2017/5/9.
@@ -19,7 +18,9 @@ public class Recognizer implements Runnable{
     private static Thread thread;
 
     void setVar(String srcPath, String outPath, String file, JButton btn, JLabel lb, JTextArea ta){
+        srcPath = srcPath.replace("\\", "\\\\");
         this.srcPath = srcPath;
+        outPath = outPath.replace("\\", "\\\\");
         this.outPath = outPath;
         this.file = file;
         this.btn = btn;
@@ -34,12 +35,12 @@ public class Recognizer implements Runnable{
         ta.setText("..............程序启动..............");
     }
 
-    private void unzip(){
+    private void unzip() throws IOException, InterruptedException {
         Printer p = new Printer(ta, "\n\t....正在解压文件....");
         p.print();
 
-        PythonInterpreter interpreter = new PythonInterpreter();
-        interpreter.execfile("src/wdy/py/unzip.py");
+        Process proc = Runtime.getRuntime().exec("python src/wdy/py/unzip.py " + srcPath + " " + outPath + "\\HDR-system\\src");
+        proc.waitFor();
 
         p.setMsg("\n100% 解压文件成功！");
         p.print();
@@ -49,8 +50,7 @@ public class Recognizer implements Runnable{
         Printer p = new Printer(ta, "\n\t....正在图片分割....");
         p.print();
 
-        PythonInterpreter interpreter = new PythonInterpreter();
-        interpreter.execfile("src/wdy/py/split.py");
+
 
         p.setMsg("\n100% 图片分割成功！");
         p.print();
@@ -60,8 +60,7 @@ public class Recognizer implements Runnable{
         Printer p = new Printer(ta, "\n\t....正在成绩识别....");
         p.print();
 
-        PythonInterpreter interpreter = new PythonInterpreter();
-        interpreter.execfile("src/wdy/py/recognize.py");
+
 
         p.setMsg("\n100% 成绩识别成功！");
         p.print();
@@ -71,8 +70,7 @@ public class Recognizer implements Runnable{
         Printer p = new Printer(ta, "\n\t....正在生成文件....");
         p.print();
 
-        PythonInterpreter interpreter = new PythonInterpreter();
-        interpreter.execfile("src/wdy/py/generate.py");
+
 
         p.setMsg("\n100% 生成文件成功！");
         p.print();
@@ -82,8 +80,7 @@ public class Recognizer implements Runnable{
         Printer p = new Printer(ta, "\n\t....正在上传数据....");
         p.print();
 
-        PythonInterpreter interpreter = new PythonInterpreter();
-        interpreter.execfile("src/wdy/py/upload.py");
+
 
         p.setMsg("\n100% 上传数据成功！");
         p.print();
@@ -93,8 +90,7 @@ public class Recognizer implements Runnable{
         Printer p = new Printer(ta, "\n\t....正在清理环境....");
         p.print();
 
-        PythonInterpreter interpreter = new PythonInterpreter();
-        interpreter.execfile("src/wdy/py/clean.py");
+
 
         p.setMsg("\n100% 清理环境成功！");
         p.print();
@@ -112,7 +108,13 @@ public class Recognizer implements Runnable{
 
     @Override
     public void run() {
-        this.unzip();
+        try {
+            this.unzip();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         this.split();
         this.recognize();
         this.generate();

@@ -1,2 +1,21 @@
-def adder(a, b):
-    return a + b  
+# coding=utf-8
+import os
+import os.path
+import sys
+import zipfile
+
+
+def un_zip(file_name, dir):
+    """unzip zip file"""
+    zip_file = zipfile.ZipFile(file_name)
+    if os.path.isdir(dir):
+        pass
+    else:
+        os.mkdir(dir)
+    for names in zip_file.namelist():
+        zip_file.extract(names, dir)
+    zip_file.close()
+
+
+if __name__ == '__main__':
+    un_zip(sys.argv[1], sys.argv[2])

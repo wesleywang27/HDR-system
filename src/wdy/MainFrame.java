@@ -333,7 +333,7 @@ public class MainFrame extends JFrame implements ActionListener {
 
             case "上传":
                 JFileChooser jfc = new JFileChooser();
-                FileNameExtensionFilter filter = new FileNameExtensionFilter("压缩文件(*.rar;*.zip)", "rar", "zip");
+                FileNameExtensionFilter filter = new FileNameExtensionFilter("压缩文件(*.zip)", "zip");
 
                 jfc.setFileSelectionMode(JFileChooser.FILES_ONLY);
                 jfc.setFileFilter(filter);
