@@ -46,11 +46,12 @@ public class Recognizer implements Runnable{
         p.print();
     }
 
-    private void split(){
+    private void split() throws IOException, InterruptedException {
         Printer p = new Printer(ta, "\n\t....正在图片分割....");
         p.print();
 
-
+        Process proc = Runtime.getRuntime().exec("python src/wdy/py/split.py " + outPath);
+        proc.waitFor();
 
         p.setMsg("\n100% 图片分割成功！");
         p.print();
@@ -115,7 +116,7 @@ public class Recognizer implements Runnable{
             this.recognize();
             this.generate();
             this.upload();
-            this.clean();
+            //this.clean();
         } catch (IOException e) {
             e.printStackTrace();
         } catch (InterruptedException e) {

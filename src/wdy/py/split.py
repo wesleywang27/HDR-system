@@ -83,10 +83,11 @@ def resize(picArray, size):
         imgEmpty.paste(imgPIL, ((w1 - w) / 2, (h1 - h) / 2))
         imgResize = imgEmpty.resize(size, Image.ANTIALIAS)
 
-        dir = u'../../tmp/split/'
+        dir = sys.argv[1] + "\\HDR-system\\stdNum\\"
         imgResize.save(dir + str(i) + '.jpg')
 
 
-file = u'../../tmp/src/pic2.png'
-pic = picSplitResize(file)
-resize(pic, (32, 32))
+if __name__ == '__main__':
+    file = sys.argv[1] + "\\HDR-system\\src\\1.png"
+    pic = picSplitResize(file)
+    resize(pic, (32, 32))

@@ -27,5 +27,7 @@ if __name__ == '__main__':
 
     os.makedirs(sys.argv[2] + "\\HDR-system")
     os.makedirs(sys.argv[2] + "\\HDR-system\\src")
+    os.makedirs(sys.argv[2] + "\\HDR-system\\stdNum")
+    os.makedirs(sys.argv[2] + "\\HDR-system\\stdScore")
 
     un_zip(sys.argv[1], sys.argv[2] + "\\HDR-system\\src")
