@@ -151,7 +151,7 @@ if __name__ == '__main__':
         s_x, s_y, e_x, e_y = get_stdScores(img)
         if e_x != 0 and e_y != 0:
             seg_stdScore(s_x, s_y, e_x, e_y, img, name[0])
-            
+
         os.remove(sys.argv[1] + "\\HDR-system\\src\\" + file)
 
     files = []
