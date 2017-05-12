@@ -10,7 +10,7 @@ from os import walk
 from scipy._lib.six import xrange
 
 
-def get_points(im):
+def get_stdNums(im):
     w, h = im.size
     i = 1
     data = list(im.getdata())
@@ -26,7 +26,7 @@ def get_points(im):
     return 0, 0, 0
 
 
-def get_red_points(im):
+def get_stdScores(im):
     w, h = im.size
     data = array(im)
     min_x = 0
@@ -49,11 +49,11 @@ def get_red_points(im):
     return min_x, min_y, max_x, max_y
 
 
-def seg_pic(x1, y1, x2, y2, im, file):
+def seg_stdNum(x1, y1, x2, y2, im, file):
     im.crop((x1, y1, x2, y2)).save(sys.argv[1] + "\\HDR-system\\src\\" + file + "_num.png")
 
 
-def seg_red_pic(x1, y1, x2, y2, im, file):
+def seg_stdScore(x1, y1, x2, y2, im, file):
     im.crop((x1, y1, x2, y2)).save(sys.argv[1] + "\\HDR-system\\src\\" + file + "_score.png")
 
 
@@ -71,7 +71,7 @@ def picSplitResize(path):
     for i in range(len(angleGray)):
         if angleGray[i] > 100:
             num += 1
-    # print num
+
     ''' num大于3说明四个角是白色的，否则是黑色'''
     if num >= 3:
         # 把原来颜色反转后加强
@@ -79,7 +79,6 @@ def picSplitResize(path):
     else:
         # 保持原来颜色不变，只是加强
         ret, bin = cv2.threshold(gray, 100, 255, cv2.THRESH_BINARY)
-    # cv2.imshow("bin",bin)
     # 膨胀后腐蚀
     dilated = cv2.dilate(bin, cv2.getStructuringElement(cv2.MORPH_RECT, (2, 2)))
     eroded = cv2.erode(dilated, cv2.getStructuringElement(cv2.MORPH_RECT, (2, 2)))
@@ -96,26 +95,20 @@ def picSplitResize(path):
     dictPic = {}
     for tours in contours:
         rc = cv2.boundingRect(tours)
-        # rc[0] 表示图像左上角的纵坐标，rc[1] 表示图像左上角的横坐标，rc[2] 表示图像的宽度，rc[3] 表示图像的高度，
-        # cv2.rectangle(bin, (rc[0],rc[1]),(rc[0]+rc[2],rc[1]+rc[3]),(255,0,255))
+        # rc[0] 表示图像左上角的纵坐标，rc[1] 表示图像左上角的横坐标，rc[2] 表示图像的宽度，rc[3] 表示图像的高度
         image1M = cv.fromarray(median)
         image1Ip = cv.GetImage(image1M)
         cv.SetImageROI(image1Ip, rc)
         imageCopy = cv.CreateImage((rc[2], rc[3]), cv2.IPL_DEPTH_8U, 1)
         cv.Copy(image1Ip, imageCopy)
         cv.ResetImageROI(image1Ip)
-        # print np.asarray(cv.GetMat(imageCopy))
         # 把图像左上角的纵坐标和图像的数组元素放到字典里
         dictPic[rc[0]] = np.asarray(cv.GetMat(imageCopy))
         pic.append(np.asarray(cv.GetMat(imageCopy)))
-        # cv.ShowImage(str(i), imageCopy)
-        # cv.Not(imageCopy, imageCopy)    #函数cvNot(const CvArr* src,CvArr* dst)会将src中的每一个元素的每一位取反，然后把结果赋给dst
-        # cv.SaveImage(str(i)+ '.jpg',imageCopy)
         i = i + 1
     sortedNum = sorted(dictPic.keys())
     for i in range(len(sortedNum)):
         pic[i] = dictPic[sortedNum[i]]
-    # cv2.waitKey(0)
     return pic
 
 
@@ -142,8 +135,8 @@ def resize(picArray, size, file):
 
 if __name__ == '__main__':
     files = []
-    for (dirpath, dirnames, filenames) in walk(sys.argv[1] + "\\HDR-system\\src\\"):
-        files.extend(filenames)
+    for (dirPath, dirNames, fileNames) in walk(sys.argv[1] + "\\HDR-system\\src\\"):
+        files.extend(fileNames)
         break
 
     for file in files:
@@ -151,18 +144,19 @@ if __name__ == '__main__':
         gray_img = img.convert('1')
         name = file.split('.')
 
-        s, e, h = get_points(gray_img)
+        s, e, h = get_stdNums(gray_img)
         if h != 0 and e != 0:
-            seg_pic(s, 0, e, h, img, name[0])
+            seg_stdNum(s, 0, e, h, img, name[0])
 
-        s_x, s_y, e_x, e_y = get_red_points(img)
+        s_x, s_y, e_x, e_y = get_stdScores(img)
         if e_x != 0 and e_y != 0:
-            seg_red_pic(s_x, s_y, e_x, e_y, img, name[0])
+            seg_stdScore(s_x, s_y, e_x, e_y, img, name[0])
+            
         os.remove(sys.argv[1] + "\\HDR-system\\src\\" + file)
 
     files = []
-    for (dirpath, dirnames, filenames) in walk(sys.argv[1] + "\\HDR-system\\src\\"):
-        files.extend(filenames)
+    for (dirPath, dirNames, fileNames) in walk(sys.argv[1] + "\\HDR-system\\src\\"):
+        files.extend(fileNames)
         break
 
     for file in files:
