@@ -5,6 +5,7 @@ import cv2
 from cv2 import cv
 from pylab import *
 import numpy as np
+from os import walk
 
 
 def picSplitResize(path):
@@ -69,7 +70,7 @@ def picSplitResize(path):
     return pic
 
 
-def resize(picArray, size):
+def resize(picArray, size, file):
     for i in range(len(picArray)):
         imgPIL = Image.fromarray(picArray[i])
         w, h = imgPIL.size
@@ -84,10 +85,15 @@ def resize(picArray, size):
         imgResize = imgEmpty.resize(size, Image.ANTIALIAS)
 
         dir = sys.argv[1] + "\\HDR-system\\stdNum\\"
-        imgResize.save(dir + str(i) + '.jpg')
+        imgResize.save(dir + file + "_" + str(i) + '.png')
 
 
 if __name__ == '__main__':
-    file = sys.argv[1] + "\\HDR-system\\src\\1.png"
-    pic = picSplitResize(file)
-    resize(pic, (32, 32))
+    files = []
+    for (dirpath, dirnames, filenames) in walk(sys.argv[1] + "\\HDR-system\\src\\"):
+        files.extend(filenames)
+        break
+    for file in files:
+        pic = picSplitResize(sys.argv[1] + "\\HDR-system\\src\\" + file)
+        name = file.split('.')
+        resize(pic, (32, 32), name[0])
