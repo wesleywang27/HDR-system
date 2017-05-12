@@ -42,23 +42,23 @@ public class Recognizer implements Runnable{
         Process proc = Runtime.getRuntime().exec("python src/wdy/py/unzip.py " + srcPath + " " + outPath);
         proc.waitFor();
 
-        p.setMsg("\n100% 解压文件成功！");
+        p.setMsg("\n100% 文件解压成功！");
         p.print();
     }
 
     private void split() throws IOException, InterruptedException {
-        Printer p = new Printer(ta, "\n\t....正在图片分割....");
+        Printer p = new Printer(ta, "\n\t....正在处理图片....");
         p.print();
 
         Process proc = Runtime.getRuntime().exec("python src/wdy/py/split.py " + outPath);
         proc.waitFor();
 
-        p.setMsg("\n100% 图片分割成功！");
+        p.setMsg("\n100% 图片处理成功！");
         p.print();
     }
 
     private void recognize(){
-        Printer p = new Printer(ta, "\n\t....正在成绩识别....");
+        Printer p = new Printer(ta, "\n\t....正在识别成绩....");
         p.print();
 
 
@@ -73,7 +73,7 @@ public class Recognizer implements Runnable{
 
 
 
-        p.setMsg("\n100% 生成文件成功！");
+        p.setMsg("\n100% 文件生成成功！");
         p.print();
     }
 
@@ -83,7 +83,7 @@ public class Recognizer implements Runnable{
 
 
 
-        p.setMsg("\n100% 上传数据成功！");
+        p.setMsg("\n100% 数据上传成功！");
         p.print();
     }
 
@@ -94,7 +94,7 @@ public class Recognizer implements Runnable{
         Process proc = Runtime.getRuntime().exec("python src/wdy/py/clean.py " + outPath);
         proc.waitFor();
 
-        p.setMsg("\n100% 清理环境成功！");
+        p.setMsg("\n100% 环境清理成功！");
         p.print();
     }
 

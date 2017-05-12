@@ -5,7 +5,56 @@ import cv2
 from cv2 import cv
 from pylab import *
 import numpy as np
+import os
 from os import walk
+from scipy._lib.six import xrange
+
+
+def get_points(im):
+    w, h = im.size
+    i = 1
+    data = list(im.getdata())
+
+    for y in xrange(h):
+        for x in xrange(w):
+            if data[y * w + x] == 0:
+                while x + i < w and data[y * w + x + i] == 0:
+                    i += 1
+                if i > 200:
+                    return x, x + i, y
+                i = 1
+    return 0, 0, 0
+
+
+def get_red_points(im):
+    w, h = im.size
+    data = array(im)
+    min_x = 0
+    min_y = 0
+    max_x = 0
+    max_y = 0
+
+    for y in xrange(h):
+        for x in xrange(w):
+            if data[y, x, 0] > 225 and data[y, x, 1] < 50 and data[y, x, 2] < 50:
+                if x < min_x or min_x == 0:
+                    min_x = x
+                if x > max_x or max_x == 0:
+                    max_x = x
+                if y < min_y or min_y == 0:
+                    min_y = y
+                if y > max_y or max_y == 0:
+                    max_y = y
+
+    return min_x, min_y, max_x, max_y
+
+
+def seg_pic(x1, y1, x2, y2, im, file):
+    im.crop((x1, y1, x2, y2)).save(sys.argv[1] + "\\HDR-system\\src\\" + file + "_num.png")
+
+
+def seg_red_pic(x1, y1, x2, y2, im, file):
+    im.crop((x1, y1, x2, y2)).save(sys.argv[1] + "\\HDR-system\\src\\" + file + "_score.png")
 
 
 def picSplitResize(path):
@@ -84,7 +133,10 @@ def resize(picArray, size, file):
         imgEmpty.paste(imgPIL, ((w1 - w) / 2, (h1 - h) / 2))
         imgResize = imgEmpty.resize(size, Image.ANTIALIAS)
 
-        dir = sys.argv[1] + "\\HDR-system\\stdNum\\"
+        if file.split('_')[1] == "num":
+            dir = sys.argv[1] + "\\HDR-system\\stdNum\\"
+        else:
+            dir = sys.argv[1] + "\\HDR-system\\stdScore\\"
         imgResize.save(dir + file + "_" + str(i) + '.png')
 
 
@@ -93,6 +145,26 @@ if __name__ == '__main__':
     for (dirpath, dirnames, filenames) in walk(sys.argv[1] + "\\HDR-system\\src\\"):
         files.extend(filenames)
         break
+
+    for file in files:
+        img = Image.open(sys.argv[1] + "\\HDR-system\\src\\" + file)
+        gray_img = img.convert('1')
+        name = file.split('.')
+
+        s, e, h = get_points(gray_img)
+        if h != 0 and e != 0:
+            seg_pic(s, 0, e, h, img, name[0])
+
+        s_x, s_y, e_x, e_y = get_red_points(img)
+        if e_x != 0 and e_y != 0:
+            seg_red_pic(s_x, s_y, e_x, e_y, img, name[0])
+        os.remove(sys.argv[1] + "\\HDR-system\\src\\" + file)
+
+    files = []
+    for (dirpath, dirnames, filenames) in walk(sys.argv[1] + "\\HDR-system\\src\\"):
+        files.extend(filenames)
+        break
+
     for file in files:
         pic = picSplitResize(sys.argv[1] + "\\HDR-system\\src\\" + file)
         name = file.split('.')
