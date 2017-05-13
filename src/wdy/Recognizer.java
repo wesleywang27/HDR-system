@@ -83,7 +83,8 @@ public class Recognizer implements Runnable{
         Printer p = new Printer(ta, "\n\t....正在上传数据....");
         p.print();
 
-
+        DBManager dbm = new DBManager(file);
+        dbm.upload();
 
         p.setMsg("\n100% 数据上传成功！");
         p.print();
@@ -125,9 +126,7 @@ public class Recognizer implements Runnable{
 
             Runtime  run  =  Runtime.getRuntime();
             run.exec("cmd /c start " + outPath + "\\" + file);
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (InterruptedException e) {
+        } catch (IOException | InterruptedException e) {
             e.printStackTrace();
         }
 

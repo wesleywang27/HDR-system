@@ -42,7 +42,7 @@ public class MainFrame extends JFrame implements ActionListener {
     private JTextField savedURL;
     private JButton updateURL;
     private JTextField fileName;
-    private JComboBox fileType;
+    private JComboBox<String> fileType;
     private JButton execute;
     private JTextArea status;
 
@@ -56,7 +56,7 @@ public class MainFrame extends JFrame implements ActionListener {
         this.mainFrame = new JFrame("中科大成绩识别系统");
         this.mainFrame.setSize(720, 405);
         this.mainFrame.setLocationRelativeTo(null);
-        this.mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.mainFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
         JPanel panel = new JPanel();
         // 添加面板
@@ -236,7 +236,7 @@ public class MainFrame extends JFrame implements ActionListener {
         c.gridy = 2;
         panel_bottom.add(fileName, c);
 
-        this.fileType = new JComboBox();
+        this.fileType = new JComboBox<>();
         fileType.addItem(".xls");
         fileType.addItem(".csv");
         c.fill = GridBagConstraints.HORIZONTAL;
@@ -305,10 +305,8 @@ public class MainFrame extends JFrame implements ActionListener {
                 try {
                     URI uri = new URI("http://www.baidu.com");
                     Desktop.getDesktop().browse(uri);
-                } catch (URISyntaxException ue) {
-                    ue.printStackTrace();
-                } catch (IOException ie) {
-                    ie.printStackTrace();
+                } catch (URISyntaxException | IOException ex) {
+                    ex.printStackTrace();
                 }
                 break;
 
@@ -386,10 +384,8 @@ public class MainFrame extends JFrame implements ActionListener {
 
                 try {
                     rc.stop();
-                } catch (IOException e1) {
-                    e1.printStackTrace();
-                } catch (InterruptedException e1) {
-                    e1.printStackTrace();
+                } catch (IOException | InterruptedException ex) {
+                    ex.printStackTrace();
                 }
 
                 break;
