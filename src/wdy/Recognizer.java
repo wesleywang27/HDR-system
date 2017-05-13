@@ -68,11 +68,12 @@ public class Recognizer implements Runnable{
         p.print();
     }
 
-    private void generate(){
+    private void generate() throws IOException, InterruptedException {
         Printer p = new Printer(ta, "\n\t....正在生成文件....");
         p.print();
 
-
+        Process proc = Runtime.getRuntime().exec("python src/wdy/py/generate.py " + outPath + " " + file);
+        proc.waitFor();
 
         p.setMsg("\n100% 文件生成成功！");
         p.print();
