@@ -237,7 +237,6 @@ public class MainFrame extends JFrame implements ActionListener {
         panel_bottom.add(fileName, c);
 
         this.fileType = new JComboBox();
-        fileType.addItem(".xlsx");
         fileType.addItem(".xls");
         fileType.addItem(".csv");
         c.fill = GridBagConstraints.HORIZONTAL;

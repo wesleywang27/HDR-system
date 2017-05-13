@@ -118,7 +118,7 @@ public class Recognizer implements Runnable{
             this.recognize();
             this.generate();
             this.upload();
-            //this.clean();
+            this.clean();
         } catch (IOException e) {
             e.printStackTrace();
         } catch (InterruptedException e) {
@@ -127,6 +127,13 @@ public class Recognizer implements Runnable{
 
         Printer p = new Printer(ta, "\n识别成功！");
         p.print();
+
+        Runtime  run  =  Runtime.getRuntime();
+        try {
+            run.exec("cmd /c start " + outPath + "\\" + file);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
         btn.setText("执行");
         lb.setIcon((new ImageIcon("src/wdy/img/red.png")));
