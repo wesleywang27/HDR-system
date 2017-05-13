@@ -45,9 +45,8 @@ public class DBManager {
     void upload() throws SQLException {
         this.connect();
 
-        String sql = "create table '" + this.tableName + "' ('id' int(10) NOT NULL AUTO_INCREMENT, 'std_num' int(10) NOT NULL, 'std_score' int(4) NOT NULL, PRIMARY KEY (`id`))";
+        String sql = "CREATE TABLE `" + tableName.split("\\.")[0] +"` ( `id` int(10) NOT NULL, `std_num` int(10) NOT NULL, `std_score` int(4) NOT NULL, PRIMARY KEY (`id`)) ENGINE=InnoDB DEFAULT CHARSET=utf8";
         this.stmt.executeUpdate(sql);
-
 
 
         this.close();

@@ -227,7 +227,7 @@ public class MainFrame extends JFrame implements ActionListener {
         panel_bottom.add(label4, c);
 
         Date now = new Date();
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMdd_hhMMss");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMdd_HHmmss");
         String file = dateFormat.format(now);
         this.fileName = new JTextField(file);
         c.fill = GridBagConstraints.HORIZONTAL;
@@ -340,7 +340,6 @@ public class MainFrame extends JFrame implements ActionListener {
                 if(file != null){
                     this.uploadStatus.setText("上传成功！");
                     this.srcPath = file.getAbsolutePath();
-                    //System.out.println(jfc.getSelectedFile().getName());
                 }
                 else{
                     this.uploadStatus.setText("");
