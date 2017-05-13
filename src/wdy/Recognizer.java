@@ -119,19 +119,15 @@ public class Recognizer implements Runnable{
             this.generate();
             this.upload();
             this.clean();
+
+            Printer p = new Printer(ta, "\n识别成功！");
+            p.print();
+
+            Runtime  run  =  Runtime.getRuntime();
+            run.exec("cmd /c start " + outPath + "\\" + file);
         } catch (IOException e) {
             e.printStackTrace();
         } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
-        Printer p = new Printer(ta, "\n识别成功！");
-        p.print();
-
-        Runtime  run  =  Runtime.getRuntime();
-        try {
-            run.exec("cmd /c start " + outPath + "\\" + file);
-        } catch (IOException e) {
             e.printStackTrace();
         }
 
