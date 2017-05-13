@@ -57,11 +57,12 @@ public class Recognizer implements Runnable{
         p.print();
     }
 
-    private void recognize(){
+    private void recognize() throws IOException, InterruptedException {
         Printer p = new Printer(ta, "\n\t....正在识别成绩....");
         p.print();
 
-
+        Process proc = Runtime.getRuntime().exec("python src/wdy/py/recognize.py " + outPath);
+        proc.waitFor();
 
         p.setMsg("\n100% 成绩识别成功！");
         p.print();
