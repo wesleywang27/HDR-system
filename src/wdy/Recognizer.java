@@ -114,19 +114,19 @@ public class Recognizer implements Runnable{
     @Override
     public void run() {
         try {
-            this.unzip();
-            this.split();
-            this.recognize();
-            this.generate();
+            //this.unzip();
+            //this.split();
+            //this.recognize();
+            //this.generate();
             this.upload();
-            this.clean();
+            //this.clean();
 
             Printer p = new Printer(ta, "\n识别成功！");
             p.print();
 
             Runtime  run  =  Runtime.getRuntime();
             run.exec("cmd /c start " + outPath + "\\" + file);
-        } catch (IOException | InterruptedException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
 
