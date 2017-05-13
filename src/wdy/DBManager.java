@@ -42,10 +42,11 @@ public class DBManager {
         }
     }
 
-    void upload(){
+    void upload() throws SQLException {
         this.connect();
 
-        String sql;
+        String sql = "create table '" + this.tableName + "' ('id' int(10) NOT NULL AUTO_INCREMENT, 'std_num' int(10) NOT NULL, 'std_score' int(4) NOT NULL, PRIMARY KEY (`id`))";
+        this.stmt.executeUpdate(sql);
 
 
 

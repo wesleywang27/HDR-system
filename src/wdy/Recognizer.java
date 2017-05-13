@@ -2,6 +2,7 @@ package wdy;
 
 import javax.swing.*;
 import java.io.IOException;
+import java.sql.SQLException;
 
 /**
  * Created by Eric on 2017/5/9.
@@ -79,7 +80,7 @@ public class Recognizer implements Runnable{
         p.print();
     }
 
-    private void upload(){
+    private void upload() throws SQLException {
         Printer p = new Printer(ta, "\n\t....正在上传数据....");
         p.print();
 
@@ -126,7 +127,7 @@ public class Recognizer implements Runnable{
 
             Runtime  run  =  Runtime.getRuntime();
             run.exec("cmd /c start " + outPath + "\\" + file);
-        } catch (IOException e) {
+        } catch (IOException | SQLException e) {
             e.printStackTrace();
         }
 
