@@ -41,10 +41,25 @@ def recognize(dir):
 if __name__ == '__main__':
     predicted = recognize(sys.argv[1] + "\\HDR-system\\stdNum\\")
     file = open(sys.argv[1] + "\\HDR-system\\stdNum\\num.txt", "w")
-    file.write(predicted)
+
+    num = 1
+    for p in predicted:
+        if num % 8 == 1:
+            file.write("16225")
+        elif (num % 8 == 6) or (num % 8 == 7):
+            file.write(str(p))
+        elif num % 8 == 0:
+            file.write(str(p) + "\n")
+        num += 1
     file.close()
 
     predicted = recognize(sys.argv[1] + "\\HDR-system\\stdScore\\")
     file = open(sys.argv[1] + "\\HDR-system\\stdScore\\score.txt", "w")
-    file.write(predicted)
+
+    num = 1
+    for p in predicted:
+        file.write(str(p))
+        if num % 2 == 0:
+            file.write("\n")
+        num += 1
     file.close()
