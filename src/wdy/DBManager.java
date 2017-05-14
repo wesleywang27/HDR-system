@@ -68,12 +68,15 @@ class DBManager {
                 this.stmt.executeUpdate(sql);
             }
             reader_num.close();
+            reader_score.close();
+
         } catch (IOException e) {
             e.printStackTrace();
         } finally {
             if (reader_num != null && reader_score != null) {
                 try {
                     reader_num.close();
+                    reader_score.close();
                 } catch (IOException e1) {
                     e1.printStackTrace();
                 }
