@@ -22,12 +22,13 @@ class DBManager {
     }
 
     private void connect(){
-        String url="jdbc:mysql://localhost:3306/hdr_system";
         try {
             Properties props = new Properties();
             InputStream in = new FileInputStream("config.properties");
             props.load(in);
             in.close();
+
+            String url="jdbc:mysql://" + props.getProperty("ip") + ":3306/" + props.getProperty("db");
 
             this.conn = DriverManager.getConnection(url, props.getProperty("user"),props.getProperty("password"));
             this.stmt = conn.createStatement();
