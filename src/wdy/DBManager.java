@@ -1,13 +1,11 @@
 package wdy;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Properties;
 
 /**
  * Created by Eric on 2017/5/13.
@@ -24,17 +22,16 @@ class DBManager {
     }
 
     private void connect(){
-        try{
-            Class.forName("com.mysql.jdbc.Driver");
-        }catch(ClassNotFoundException e1){
-            e1.printStackTrace();
-        }
-
         String url="jdbc:mysql://localhost:3306/hdr_system";
         try {
-            this.conn = DriverManager.getConnection(url, "root","");
+            Properties props = new Properties();
+            InputStream in = new FileInputStream("config.properties");
+            props.load(in);
+            in.close();
+
+            this.conn = DriverManager.getConnection(url, props.getProperty("user"),props.getProperty("password"));
             this.stmt = conn.createStatement();
-        } catch (SQLException e){
+        } catch (SQLException | IOException e){
             e.printStackTrace();
         }
     }
@@ -81,7 +78,7 @@ class DBManager {
                 }
             }
         }
-        
+
         this.close();
     }
 }

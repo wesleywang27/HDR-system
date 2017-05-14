@@ -253,6 +253,6 @@ paket-files/
 
 # add by eric
 *iml
-*wav
 *.model
-out/
+*.properties
+*wav
