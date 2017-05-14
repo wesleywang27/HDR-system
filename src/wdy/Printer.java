@@ -21,7 +21,7 @@ public class Printer implements Runnable {
     void print(){
         Thread thread = new Thread(this);
         try {
-            thread.sleep(1000);
+            Thread.sleep(1000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
