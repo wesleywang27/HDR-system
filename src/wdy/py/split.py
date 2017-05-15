@@ -36,7 +36,7 @@ def get_stdScores(im):
 
     for y in xrange(h):
         for x in xrange(w):
-            if data[y, x, 0] > 225 and data[y, x, 1] < 50 and data[y, x, 2] < 50:
+            if data[y, x, 0] > 180 and data[y, x, 1] < 40 and data[y, x, 2] < 40:
                 if x < min_x or min_x == 0:
                     min_x = x
                 if x > max_x or max_x == 0:
