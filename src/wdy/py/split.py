@@ -54,7 +54,7 @@ def seg_stdNum(x1, y1, x2, y2, im, file):
 
 
 def seg_stdScore(x1, y1, x2, y2, im, file):
-    im.crop((x1, y1, x2, y2)).save(sys.argv[1] + "\\HDR-system\\src\\" + file + "_score.png")
+    im.crop((x1-10, y1-10, x2+10, y2+10)).save(sys.argv[1] + "\\HDR-system\\src\\" + file + "_score.png")
 
 
 def picSplitResize(path):
