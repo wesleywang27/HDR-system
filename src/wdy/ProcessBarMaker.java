@@ -4,18 +4,18 @@ import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
 
-public class ProcessBarDemo extends JFrame{
+public class ProcessBarMaker extends JFrame{
     private static final long serialVersionUID = 1L;
     private JProgressBar processBar;
 
-    public ProcessBarDemo(){
+    public ProcessBarMaker(){
         setTitle("处理中..");
 
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+
+        setSize(250, 120);
 
         setLocationRelativeTo(null);
-
-        setBounds(100, 100, 250, 120);
 
         JPanel contentPane = new JPanel();
 
@@ -32,23 +32,21 @@ public class ProcessBarDemo extends JFrame{
         processBar.setBackground(Color.LIGHT_GRAY);
 
         new Thread(() -> {
-            for (int i = 0; i < 101; i++) {
+            for (int i = 0; i < 100; i++) {
                 try {
-                    Thread.sleep(1627);
+                    Thread.sleep(1500);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
                 processBar.setValue(i);
             }
-            try {
-                processBar.setString("处理成功!");
-                Thread.sleep(1627);
-                this.setVisible(false);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
+            processBar.setString("99%");
         }).start();
 
         contentPane.add(processBar);
+    }
+
+    void setProcessBar(String str){
+        this.processBar.setString(str);
     }
 }

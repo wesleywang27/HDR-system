@@ -51,11 +51,14 @@ public class Recognizer implements Runnable{
         Printer p = new Printer(ta, "\n\t....正在处理图片....");
         p.print();
 
-        ProcessBarDemo JPBD = new ProcessBarDemo();
-        JPBD.setVisible(true);
+        ProcessBarMaker pb = new ProcessBarMaker();
+        pb.setVisible(true);
 
         Process proc = Runtime.getRuntime().exec("python src/wdy/py/split.py " + outPath);
         proc.waitFor();
+
+        pb.setProcessBar("100%");
+        pb.setVisible(false);
 
         p.setMsg("\n100% 图片处理成功！");
         p.print();
