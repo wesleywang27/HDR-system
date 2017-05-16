@@ -32,15 +32,22 @@ public class ProcessBarMaker extends JFrame{
         processBar.setBackground(Color.LIGHT_GRAY);
 
         new Thread(() -> {
-            for (int i = 0; i < 100; i++) {
+            for (int i = 0; i < 96; i++) {
                 try {
-                    Thread.sleep(1500);
+                    Thread.sleep(1300);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
                 processBar.setValue(i);
             }
-            processBar.setString("99%");
+            for (int i = 96; i < 100; i++) {
+                try {
+                    Thread.sleep(1700);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                processBar.setValue(i);
+            }
         }).start();
 
         contentPane.add(processBar);
