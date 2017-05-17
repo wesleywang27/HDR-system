@@ -52,6 +52,9 @@ class DBManager {
         String sql = "CREATE TABLE `" + tableName.split("\\.")[0] +"` ( `id` int(10) NOT NULL AUTO_INCREMENT, `std_num` int(10) NOT NULL, `std_score` int(4) NOT NULL, PRIMARY KEY (`id`)) ENGINE=InnoDB DEFAULT CHARSET=utf8";
         this.stmt.executeUpdate(sql);
 
+        sql = "INSERT INTO `tables`(`id`, `name`) VALUES (NULL,'" + tableName.split("\\.")[0] + "')";
+        this.stmt.executeUpdate(sql);
+
         File file_num = new File(path + "\\HDR-system\\stdNum\\num.txt");
         BufferedReader reader_num = null;
         File file_score = new File(path + "\\HDR-system\\stdScore\\score.txt");
