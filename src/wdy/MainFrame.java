@@ -303,7 +303,7 @@ public class MainFrame extends JFrame implements ActionListener {
         switch (source){
             case "打开":
                 try {
-                    URI uri = new URI("http://www.baidu.com");
+                    URI uri = new URI("http://localhost:8000/");
                     Desktop.getDesktop().browse(uri);
                 } catch (URISyntaxException | IOException ex) {
                     ex.printStackTrace();
