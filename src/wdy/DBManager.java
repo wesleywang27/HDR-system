@@ -3,7 +3,6 @@ package wdy;
 import java.io.*;
 import java.sql.*;
 import java.util.Properties;
-
 /**
  * Created by Eric on 2017/5/13.
  */
